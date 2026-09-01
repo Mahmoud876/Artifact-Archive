@@ -130,9 +130,7 @@ const detectorPython = process.platform === "win32"
 const currentWebStatus = await responseStatus(webUrl);
 if (currentWebStatus !== null && currentWebStatus >= 200 && currentWebStatus < 400 && await isSeshatServer(webUrl)) {
   console.log(`[ready] Seshat is already running at ${webUrl}`);
-  process.exit(0);
-}
-
+} else {
 const occupiedWebPid = listeningPid(3000);
 if (occupiedWebPid) {
   if (!(await isSeshatServer(webUrl))) {
@@ -178,3 +176,4 @@ console.log("[open] http://localhost:3000");
 const vinextCli = join(root, "node_modules", "vinext", "dist", "cli.js");
 const web = startManaged("Seshat web app", process.execPath, [vinextCli, "start"], root);
 web.on("exit", (code) => shutdown(code ?? 0));
+}
