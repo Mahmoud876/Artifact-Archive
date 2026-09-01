@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 56" fill="none">
+  <defs>
+    <clipPath id="fa"><path d="M134 17c26-5 52-6 72-3l-2 6c-20-3-46-2-70 3Z"/></clipPath>
+    <clipPath id="fb"><path d="M134 24c28-3 58-3 80 2l-2 6c-22-5-52-5-78-2Z"/></clipPath>
+    <clipPath id="fc"><path d="M134 31c30-1 62 2 88 11l-4 5c-26-8-56-11-84-10Z"/></clipPath>
+    <g id="wing">
+      <path d="M134 17c26-5 52-6 72-3l-2 6c-20-3-46-2-70 3Z" fill="#C79A4A"/>
+      <path d="M134 24c28-3 58-3 80 2l-2 6c-22-5-52-5-78-2Z" fill="#DDB971"/>
+      <path d="M134 31c30-1 62 2 88 11l-4 5c-26-8-56-11-84-10Z" fill="#B08A52"/>
+      <g stroke="#7C5C22" stroke-width="1.2" opacity=".5">
+        <g clip-path="url(#fa)"><path d="M146 10v16M158 10v16M170 10v16M182 10v16M194 10v16"/></g>
+        <g clip-path="url(#fb)"><path d="M148 18v18M162 18v18M176 18v18M190 18v18M204 18v18"/></g>
+        <g clip-path="url(#fc)"><path d="M148 26v24M164 26v24M180 26v24M196 26v24M210 30v24"/></g>
+      </g>
+    </g>
+  </defs>
+  <use href="#wing"/>
+  <use href="#wing" transform="translate(240 0) scale(-1 1)"/>
+  <circle cx="120" cy="26" r="13" fill="#C79A4A"/>
+  <circle cx="120" cy="26" r="13" stroke="#7C5C22" stroke-width="1.5" opacity=".55"/>
+  <circle cx="120" cy="26" r="7" fill="#EFDBAF" opacity=".55"/>
+  <path d="M107 22c-4-2-6-6-4-9 2-2 5-1 5 2M133 22c4-2 6-6 4-9-2-2-5-1-5 2" stroke="#B08A52" stroke-width="2.4" stroke-linecap="round"/>
+</svg>

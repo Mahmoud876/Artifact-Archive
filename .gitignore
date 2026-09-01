@@ -1,0 +1,71 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.*
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/versions
+
+# testing
+/coverage
+
+# next.js
+/.next/
+/.vinext/
+/out/
+
+# misc
+.DS_Store
+*.pem
+
+# debug
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+.env*
+!.env.example
+
+# vercel
+.vercel
+
+/dist/
+/.wrangler/
+/outputs/
+/work/
+/data/htr-cache/
+/data/accounts.json
+/vision-service/models/swinir/*.pth
+
+# wrangler local secrets
+.dev.vars
+
+# local development and AI-tool state
+/.agents/
+/.claude/
+/.codex/
+/.impeccable/
+/.node-runtime/
+/.openai/
+/.qodo/
+/.uv-cache/
+/.uv-tool/
+/tsconfig.tsbuildinfo
+
+# Python environments and generated caches
+**/.venv/
+**/.uv-cache/
+**/__pycache__/
+*.py[cod]
+
+# Local archival fixtures are retained on the workstation, not published.
+/samples/
+
+# Optional HTR-only vendor code is not required by this extraction-only build.
+/vision-service/vendor/

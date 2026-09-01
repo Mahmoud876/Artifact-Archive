@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 44" width="120" height="44" fill="none">
+  <rect x="0" y="0" width="120" height="4" fill="#7C5C22"/>
+  <rect x="0" y="4" width="120" height="2" fill="#E8DCBE"/>
+  <g>
+    <rect x="0" y="6" width="12" height="22" fill="#3C8A80"/>
+    <rect x="12" y="6" width="12" height="22" fill="#E8DCBE"/>
+    <rect x="24" y="6" width="12" height="22" fill="#C79A4A"/>
+    <rect x="36" y="6" width="12" height="22" fill="#E8DCBE"/>
+    <rect x="48" y="6" width="12" height="22" fill="#3C8A80"/>
+    <rect x="60" y="6" width="12" height="22" fill="#E8DCBE"/>
+    <rect x="72" y="6" width="12" height="22" fill="#C79A4A"/>
+    <rect x="84" y="6" width="12" height="22" fill="#E8DCBE"/>
+    <rect x="96" y="6" width="12" height="22" fill="#3C8A80"/>
+    <rect x="108" y="6" width="12" height="22" fill="#E8DCBE"/>
+  </g>
+  <rect x="0" y="6" width="120" height="22" fill="#0C1C1B" opacity=".12"/>
+  <rect x="0" y="28" width="120" height="3" fill="#7C5C22"/>
+  <rect x="0" y="31" width="120" height="9" fill="#C79A4A"/>
+  <g stroke="#7C5C22" stroke-width="1.5" opacity=".65">
+    <path d="M6 40l7-9M26 40l7-9M46 40l7-9M66 40l7-9M86 40l7-9M106 40l7-9"/>
+  </g>
+  <rect x="0" y="40" width="120" height="4" fill="#7C5C22" opacity=".55"/>
+</svg>

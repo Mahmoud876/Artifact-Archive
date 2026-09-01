@@ -1,0 +1,5 @@
+Archivo Narrow, Spline Sans Mono and Noto Naskh Arabic are licensed under the SIL Open Font License 1.1.
+Archivo Narrow: https://github.com/Omnibus-Type/ArchivoNarrow
+Spline Sans Mono: https://github.com/SorkinType/SplineSansMono
+Noto Naskh Arabic: https://github.com/notofonts/arabic
+Full licence: https://openfontlicense.org

@@ -1,0 +1,183 @@
+/* ==========================================================================
+   Seshat — refinement layer
+   Depth, ornament and rhythm on top of the structural styles. Loaded last so
+   it can raise the finish of existing components without restructuring them.
+   ========================================================================== */
+
+/* ------------------------- the page as a paper ground --------------------- */
+
+/* A ruled margin down the left of the work area, the way a ledger sheet is
+   scored, plus a soft vignette so panels sit on the page instead of floating. */
+.main::before {
+  content: ""; position: fixed; top: 0; bottom: 0; left: 0; width: 100%; pointer-events: none; z-index: 0;
+  background:
+    radial-gradient(120% 80% at 50% 0%, rgba(255, 253, 246, .5), transparent 60%),
+    radial-gradient(100% 60% at 50% 100%, rgba(60, 48, 24, .07), transparent 70%);
+}
+.main > * { position: relative; z-index: 1; }
+
+/* --------------------------- panels with corners -------------------------- */
+
+/* Thin gold brackets at each corner — the mark an archivist's stamp leaves on
+   a card. Drawn with backgrounds so the pseudo-elements stay free. */
+.detail-panel, .stat-card, .run-card {
+  background-color: var(--panel);
+  background-image:
+    linear-gradient(var(--gold), var(--gold)), linear-gradient(var(--gold), var(--gold)),
+    linear-gradient(var(--gold), var(--gold)), linear-gradient(var(--gold), var(--gold)),
+    linear-gradient(var(--gold), var(--gold)), linear-gradient(var(--gold), var(--gold)),
+    linear-gradient(var(--gold), var(--gold)), linear-gradient(var(--gold), var(--gold)),
+    url('/pattern-papyrus.svg');
+  background-repeat: no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, no-repeat, repeat;
+  background-size:
+    14px 1px, 1px 14px, 14px 1px, 1px 14px,
+    14px 1px, 1px 14px, 14px 1px, 1px 14px, 190px 190px;
+  background-position:
+    left 9px top 9px, left 9px top 9px,
+    right 9px top 9px, right 9px top 9px,
+    left 9px bottom 9px, left 9px bottom 9px,
+    right 9px bottom 9px, right 9px bottom 9px, 0 0;
+}
+
+/* Panels arrive rather than appear. */
+@keyframes riseIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+.detail-panel, .stat-card, .run-card, .table-block { animation: riseIn .34s cubic-bezier(.2, .7, .3, 1) both; }
+.stat-row .stat-card:nth-child(2) { animation-delay: .04s; }
+.stat-row .stat-card:nth-child(3) { animation-delay: .08s; }
+.stat-row .stat-card:nth-child(4) { animation-delay: .12s; }
+
+/* ------------------------------- stat cards ------------------------------- */
+
+.stat-card { padding: 20px 22px 22px; overflow: hidden; }
+.stat-card::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px;
+  background: linear-gradient(90deg, var(--gold-bright), var(--gold) 40%, transparent);
+  width: auto;
+}
+.stat-card::after {
+  content: ""; position: absolute; right: -18px; bottom: -22px; width: 92px; height: 92px; opacity: .07;
+  background: url('/seshat-emblem.svg') center / contain no-repeat;
+}
+.stat-card small { color: var(--ink-3); letter-spacing: .18em; }
+.stat-card strong {
+  margin-top: 12px; font-size: 42px; line-height: 1; letter-spacing: -.02em;
+  color: var(--basalt-2); text-shadow: 0 1px 0 rgba(255, 255, 255, .8);
+}
+.stat-card:hover { border-color: var(--gold); box-shadow: var(--lift); }
+
+/* ----------------------------- section rhythm ----------------------------- */
+
+.view-head h2, .section-heading h2 { font-size: 34px; }
+.view-head .eyebrow, .section-heading .eyebrow { position: relative; padding-left: 22px; }
+.view-head .eyebrow::before, .section-heading .eyebrow::before {
+  content: ""; position: absolute; left: 0; top: 50%; width: 14px; height: 1px;
+  background: var(--gold); box-shadow: 0 3px 0 rgba(185, 140, 63, .45);
+}
+.panel-title h3 { font-size: 24px; }
+.panel-title .eyebrow { letter-spacing: .22em; }
+
+/* -------------------------------- run cards ------------------------------- */
+
+.run-card { padding: 22px; gap: 14px; }
+.run-card::before {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px;
+  background: linear-gradient(90deg, var(--faience), var(--faience) 38%, transparent);
+  opacity: .8;
+}
+.run-card { position: relative; }
+.run-card:hover { transform: translateY(-3px); }
+.run-card header strong { font-size: 15px; }
+.run-card .seal { box-shadow: 0 0 0 4px rgba(185, 140, 63, .1); }
+
+/* the task badge carries the colour of its operation */
+.task-chip { font-weight: 700; letter-spacing: .06em; border-width: 1px; }
+.task-extract { border-color: var(--faience); color: #235f58; background: #eaf4f0; }
+.task-classify { border-color: var(--lapis); color: var(--lapis); background: #e8f0f5; }
+.task-transcribe { border-color: var(--gold); color: var(--gold-ink); background: #f8efdb; }
+.task-summarize { border-color: var(--malachite); color: var(--malachite); background: #e6f1ea; }
+.task-catalogue { border-color: var(--carnelian); color: var(--carnelian); background: #f7e9e6; }
+
+/* plates laid out like prints dropped on a desk */
+.crop-strip { padding: 4px 2px; }
+.crop-strip img, .crop-strip .crop-placeholder {
+  border: 3px solid var(--panel); outline: 1px solid var(--line);
+  box-shadow: 0 6px 14px -10px rgba(12, 28, 27, .9);
+  transition: transform .18s ease, box-shadow .18s ease;
+}
+.crop-strip img:nth-child(odd) { transform: rotate(-1.6deg); }
+.crop-strip img:nth-child(even) { transform: rotate(1.4deg); }
+.crop-strip img:hover { transform: scale(1.14) rotate(0deg); box-shadow: 0 12px 22px -12px rgba(12, 28, 27, .9); z-index: 2; position: relative; }
+
+/* -------------------------------- taxonomy -------------------------------- */
+
+.tax-row { padding: 15px 14px; gap: 16px; border-bottom: 1px solid var(--line-soft); }
+.tax-row:last-child { border-bottom: 0; }
+.tax-name { font-size: 14.5px; }
+.tax-count { font-size: 22px; color: var(--basalt-2); }
+.tax-bar {
+  height: 18px; background: var(--panel-sunk); border-color: var(--line);
+  position: relative; overflow: hidden;
+}
+/* measure ticks, like a surveyor's rule under the bar */
+.tax-bar::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(90deg, transparent 0 23px, rgba(12, 28, 27, .16) 23px 24px);
+}
+.tax-bar i {
+  background: linear-gradient(90deg, var(--faience), var(--gold-bright));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .35);
+  transition: width .5s cubic-bezier(.2, .7, .3, 1);
+}
+.tax-row.active { box-shadow: inset 3px 0 0 var(--gold); }
+
+/* -------------------------------- sidebar --------------------------------- */
+
+.nav .brand { padding-top: 6px; }
+.nav-bottom { position: relative; }
+/* a winged disc watching over the rail */
+.nav nav::before {
+  content: ""; display: block; height: 34px; margin: 0 auto 14px; opacity: .3;
+  background: url('/motif-winged-sun.svg') center / contain no-repeat;
+}
+.workspace-active .nav nav::before { height: 22px; }
+.nav nav button { border-radius: 2px; }
+
+/* --------------------------------- tables --------------------------------- */
+
+.table-wrap { box-shadow: var(--relief); }
+.register-table thead th { letter-spacing: .04em; }
+.register-table tbody tr { transition: background .14s ease; }
+.table-block { position: relative; }
+
+/* -------------------------------- controls -------------------------------- */
+
+.secondary, .danger-button, .search-field input, .select-field select, .rename-row input { border-radius: 2px; }
+.secondary { box-shadow: 0 1px 0 rgba(255, 255, 255, .7) inset; }
+.secondary:hover { transform: translateY(-1px); }
+.export-button, .run-button { border-radius: 2px; }
+
+/* keeps the ledger legible when a record carries no plate */
+.ledger article { border-left: 3px solid transparent; transition: border-color .16s ease, background .16s ease; }
+.ledger article:hover { border-left-color: var(--gold); background: var(--panel); }
+
+@media (prefers-reduced-motion: reduce) {
+  .detail-panel, .stat-card, .run-card, .table-block { animation: none; }
+}
+
+@media (max-width: 780px) {
+  .view-head h2, .section-heading h2 { font-size: 26px; }
+  .stat-card strong { font-size: 32px; }
+  .stat-card::after { display: none; }
+}
+
+
+/* ------------------------------- numerals -------------------------------- */
+
+/* Serials, counts, page numbers and zoom readouts are compared down a column,
+   so they need fixed-width figures rather than the proportional default. */
+.stat-card strong, .tax-count, .review-count strong, .record-number, .ledger-index,
+.artifact-serial, .zoom-controls output, .register-table .row-number,
+.inventory-page-number, .seal, .item-title span, .intake-file-list small,
+.inventory-intro dd, .row-navigator > div button {
+  font-variant-numeric: tabular-nums;
+}

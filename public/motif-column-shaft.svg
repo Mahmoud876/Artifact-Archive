@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 80" width="120" height="80" fill="none">
+  <g stroke="#C79A4A" stroke-width="1.4" opacity=".5">
+    <path d="M20 0v80M40 0v80M60 0v80M80 0v80M100 0v80"/>
+  </g>
+  <g stroke="#3C8A80" stroke-width="2.2" opacity=".38">
+    <path d="M30 0v80M50 0v80M70 0v80M90 0v80"/>
+  </g>
+  <g stroke="#7C5C22" stroke-width="1" opacity=".3">
+    <path d="M0 40h120"/>
+  </g>
+</svg>

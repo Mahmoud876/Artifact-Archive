@@ -1,0 +1,53 @@
+import { defineConfig, globalIgnores } from "eslint/config";
+import eslint from "@eslint/js";
+import next from "@next/eslint-plugin-next";
+import jsxA11y from "eslint-plugin-jsx-a11y";
+import react from "eslint-plugin-react";
+import reactHooks from "eslint-plugin-react-hooks";
+import globals from "globals";
+import tseslint from "typescript-eslint";
+
+const eslintConfig = defineConfig([
+  globalIgnores([
+    ".next/**",
+    "dist/**",
+    "out/**",
+    "build/**",
+    "next-env.d.ts",
+    // The detector's Python virtualenv ships bundled JS that is not ours to lint.
+    "vision-service/**",
+  ]),
+  eslint.configs.recommended,
+  ...tseslint.configs.recommended,
+  react.configs.flat.recommended,
+  react.configs.flat["jsx-runtime"],
+  reactHooks.configs.flat["recommended-latest"],
+  jsxA11y.flatConfigs.recommended,
+  next.configs["core-web-vitals"],
+  {
+    languageOptions: {
+      globals: {
+        ...globals.browser,
+        ...globals.node,
+        ...globals.serviceworker,
+      },
+    },
+    settings: {
+      react: {
+        version: "detect",
+      },
+    },
+    rules: {
+      // A leading underscore is how this codebase marks a binding it destructures
+      // only in order to leave it out. Honour that instead of flagging it.
+      "@typescript-eslint/no-unused-vars": ["error", {
+        argsIgnorePattern: "^_",
+        varsIgnorePattern: "^_",
+        caughtErrorsIgnorePattern: "^_",
+        ignoreRestSiblings: true,
+      }],
+    },
+  },
+]);
+
+export default eslintConfig;
