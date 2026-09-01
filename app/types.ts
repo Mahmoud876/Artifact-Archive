@@ -190,8 +190,6 @@ export type InventorySummary = {
 
 export type SystemStatus = {
   analysis: { configured: boolean };
-  ollama: { ok: boolean; base: string; models: string[]; error?: string };
-  detector: { ok: boolean; base: string; status?: string; device?: string; model?: string; cuda?: string; error?: string };
   defaults: { model: string };
 };
 

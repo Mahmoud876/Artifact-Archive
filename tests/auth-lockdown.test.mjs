@@ -18,3 +18,12 @@ test("public registration is disabled while local administrator login remains av
   assert.match(utility, /scryptSync/);
   assert.match(utility, /rename\(temporaryPath, accountPath\)/);
 });
+
+test("marks login cookies secure when HTTPS terminates at the trusted local proxy", async () => {
+  const { sessionCookie, expiredSessionCookie } = await import("../app/local-auth.ts");
+  const request = new Request("http://127.0.0.1:3000/api/auth/login", {
+    headers: { "x-forwarded-proto": "https" },
+  });
+  assert.match(sessionCookie("signed-token", request), /; Secure/);
+  assert.match(expiredSessionCookie(request), /; Secure/);
+});

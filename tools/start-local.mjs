@@ -47,7 +47,7 @@ async function isSeshatServer(baseUrl) {
     const response = await fetch(`${baseUrl}/api/system`, { signal: AbortSignal.timeout(3_000) });
     if (!response.ok) return false;
     const payload = await response.json();
-    return Boolean(payload?.defaults && payload?.detector && payload?.ollama && payload?.gemini);
+    return Boolean(payload?.defaults && payload?.analysis);
   } catch {
     return false;
   }

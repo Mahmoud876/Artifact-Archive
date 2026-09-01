@@ -201,13 +201,15 @@ export async function authenticatedUser(request: Request): Promise<SessionUser |
 }
 
 export function sessionCookie(token: string, request: Request): string {
-  const secure = new URL(request.url).protocol === "https:" ? "; Secure" : "";
+  const forwardedProtocol = request.headers.get("x-forwarded-proto")?.split(",")[0]?.trim().toLowerCase();
+  const secure = forwardedProtocol === "https" || new URL(request.url).protocol === "https:" ? "; Secure" : "";
   return SESSION_COOKIE + "=" + encodeURIComponent(token)
     + "; Path=/; HttpOnly; SameSite=Lax; Max-Age=" + SESSION_LIFETIME_SECONDS + secure;
 }
 
 export function expiredSessionCookie(request: Request): string {
-  const secure = new URL(request.url).protocol === "https:" ? "; Secure" : "";
+  const forwardedProtocol = request.headers.get("x-forwarded-proto")?.split(",")[0]?.trim().toLowerCase();
+  const secure = forwardedProtocol === "https" || new URL(request.url).protocol === "https:" ? "; Secure" : "";
   return SESSION_COOKIE + "=; Path=/; HttpOnly; SameSite=Lax; Max-Age=0" + secure;
 }
 

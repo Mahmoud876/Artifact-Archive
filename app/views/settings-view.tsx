@@ -40,19 +40,14 @@ export default function SettingsView(props: Props) {
 
     <section className="detail-panel">
       <div className="panel-title">
-        <div><span className="eyebrow">LOCAL SERVICES</span><h3>Connected instruments</h3></div>
+        <div><span className="eyebrow">SERVICE STATUS</span><h3>Extraction service</h3></div>
         <button className="secondary" onClick={props.onRefresh} disabled={props.statusLoading}>{props.statusLoading ? "Checking…" : "Re-check"}</button>
       </div>
       {props.statusError && <div className="notice error"><strong>Could not read service status</strong><p>{props.statusError}</p></div>}
       <div className="service-grid extraction-services">
-        <div className={`service-card ${status?.detector.ok ? "up" : "down"}`}>
-          <header><span className="status-dot" /><strong>Region detector</strong><small>{status?.detector.ok ? status.detector.status ?? "Ready" : "Unreachable"}</small></header>
-          <dl>
-            <div><dt>Endpoint</dt><dd>{status?.detector.base ?? "—"}</dd></div>
-            <div><dt>Model</dt><dd>{status?.detector.model ?? "—"}</dd></div>
-            <div><dt>Device</dt><dd>{status?.detector.cuda ?? status?.detector.device ?? "—"}</dd></div>
-          </dl>
-          {status?.detector.error && <p className="service-error">{status.detector.error}</p>}
+        <div className={`service-card ${status?.analysis.configured ? "up" : "down"}`}>
+          <header><span className="status-dot" /><strong>Extraction service</strong><small>{status?.analysis.configured ? "Ready" : "Not configured"}</small></header>
+          <p className="hollow">The server selects and manages the analysis route automatically.</p>
         </div>
       </div>
     </section>

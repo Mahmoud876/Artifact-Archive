@@ -1,0 +1,20 @@
+artifact-extractor.duckdns.org {
+	encode zstd gzip
+
+	header {
+		-Server
+		X-Content-Type-Options nosniff
+		X-Frame-Options DENY
+		Referrer-Policy strict-origin-when-cross-origin
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+	}
+
+	reverse_proxy 127.0.0.1:3000 {
+		transport http {
+			dial_timeout 10s
+			response_header_timeout 16m
+		}
+	}
+
+	log
+}

@@ -54,6 +54,10 @@ The first start after the inventory upgrade automatically adds permanent invento
 
 Configuration is documented in `.env.example`; defaults target local Ollama and the local detector.
 
+## Google Cloud deployment
+
+The production VM, HTTPS, DNS, account bootstrap, update, and rollback procedure is documented in [`deploy/README.md`](deploy/README.md). Runtime keys remain on the VM and are never committed.
+
 Runtime credentials, account records, generated crops, caches, local model weights, and archival fixtures are intentionally excluded from this public repository.
 
 ## Verification
