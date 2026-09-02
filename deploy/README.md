@@ -70,7 +70,16 @@ Create the administrator with a new private production password:
 ```bash
 cd /opt/seshat
 read -rsp "New admin password: " SESHAT_ADMIN_PASSWORD; echo
-sudo -u seshat env SESHAT_ADMIN_PASSWORD="$SESHAT_ADMIN_PASSWORD" node tools/manage-admin.mjs
+sudo -u seshat env SESHAT_ADMIN_USERNAME="admin" SESHAT_ADMIN_PASSWORD="$SESHAT_ADMIN_PASSWORD" node tools/manage-admin.mjs
+unset SESHAT_ADMIN_PASSWORD
+```
+
+To rename an existing administrator, provide the new username and the previous username in the same command. The account ID is preserved and the password is replaced:
+
+```bash
+cd /opt/seshat
+read -rsp "New admin password: " SESHAT_ADMIN_PASSWORD; echo
+sudo -u seshat env SESHAT_ADMIN_USERNAME="new-username" SESHAT_PREVIOUS_ADMIN_USERNAME="admin" SESHAT_ADMIN_PASSWORD="$SESHAT_ADMIN_PASSWORD" node tools/manage-admin.mjs
 unset SESHAT_ADMIN_PASSWORD
 ```
 

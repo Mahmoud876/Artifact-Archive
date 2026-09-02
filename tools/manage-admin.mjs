@@ -4,8 +4,20 @@ import path from "node:path";
 
 const accountPath = path.join(process.cwd(), "data", "accounts.json");
 const temporaryPath = `${accountPath}.tmp`;
-const username = "admin";
-const displayName = "Seshat Administrator";
+
+function normalizeUsername(value) {
+  return value.trim().normalize("NFKC").toLocaleLowerCase("en-US");
+}
+
+function validUsername(value) {
+  return value.length >= 3
+    && value.length <= 64
+    && /^[\p{L}\p{N}][\p{L}\p{N}._@-]*$/u.test(value);
+}
+
+const username = normalizeUsername(process.env.SESHAT_ADMIN_USERNAME || "admin");
+const previousUsername = normalizeUsername(process.env.SESHAT_PREVIOUS_ADMIN_USERNAME || "admin");
+const displayName = (process.env.SESHAT_ADMIN_DISPLAY_NAME?.trim() || "Seshat User").slice(0, 80);
 
 function passwordHash(password) {
   const salt = randomBytes(16).toString("base64url");
@@ -26,11 +38,16 @@ async function readStore() {
 
 const store = await readStore();
 const password = process.env.SESHAT_ADMIN_PASSWORD || `${randomBytes(24).toString("base64url")}A7!`;
+if (!validUsername(username)) {
+  throw new Error("SESHAT_ADMIN_USERNAME must contain 3-64 letters, numbers, dots, dashes, underscores or @.");
+}
 if (password.length < 8 || password.length > 128) {
   throw new Error("SESHAT_ADMIN_PASSWORD must contain between 8 and 128 characters.");
 }
-const existing = store.accounts.find((account) => account.username === username);
+const existing = store.accounts.find((account) => account.username === username)
+  || store.accounts.find((account) => account.username === previousUsername);
 if (existing) {
+  existing.username = username;
   existing.displayName = displayName;
   existing.passwordHash = passwordHash(password);
   existing.active = true;
@@ -49,4 +66,4 @@ await mkdir(path.dirname(accountPath), { recursive: true });
 await writeFile(temporaryPath, `${JSON.stringify(store, null, 2)}\n`, { encoding: "utf8", mode: 0o600 });
 await rename(temporaryPath, accountPath);
 console.log(`ADMIN_USERNAME=${username}`);
-console.log(`TEMP_PASSWORD=${password}`);
+console.log("ADMIN_PASSWORD_UPDATED=true");
